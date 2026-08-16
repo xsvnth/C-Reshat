@@ -1,26 +1,15 @@
-#include <string.h>
-#include <stdio.h>
-
-void	anagram(char *s1, char *s2)
-{
-	int	c[256] = {0};
-	if (strlen(s1) != strlen(s2))
-		return;
-	while(*s1) {
-		c[(unsigned char)*s1++]++, c[(unsigned char)*s2++]--;
-		for (int i = 0; i < 256; i++)
-			if (c[i]) {
-				printf("False\n");
-				return;
-			}
-	}
-	printf("True\n");
+#include <stdbool.h>
+bool isAnagram(char* s, char* t) {
+    int a[256] = {0};
+    while (*s)
+        a[*s++]++, a[*t++]--;
+    for (int i = 0; i < 256; i++)
+            if (a[i])
+                return false;
+    return true;
 }
-
-int	main(void) {
-	char	str1[17], str2[17];
-	printf("enter s1 & s2->");
-	scanf(" %s %s", str1, str2);
-	anagram(str1, str2);
-	return (0);
+#include <stdio.h>
+int main(){
+    char a[] = "silent", b[] = "sisten";
+    printf("%d\n", isAnagram(a, b));
 }
