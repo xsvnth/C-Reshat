@@ -1,7 +1,5 @@
 #include<stdio.h>
-
-void	group_anagrams(char	**r, int	size) 
-{
+void	group_anagrams(char	**r, int	size) {
 	printf("[");
 	int	used[256] = {0};
 	for(int i = 0; i < size; i++) {
@@ -33,9 +31,7 @@ void	group_anagrams(char	**r, int	size)
 	printf("\b\b]\n");
 	return;
 }
-
-int	main()
-{
+int	main(){
 	char	*r[256] = {"cat", "tac", "act", "hat"};
 	group_anagrams(r, 4);
 	return(0);
