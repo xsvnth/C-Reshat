@@ -44,15 +44,6 @@ char ***groupAnagrams(char **strs, int strsSize,
             groups++;
         }
     }
-    /*
-        //new grp
-        else {
-            res[groups] = malloc(sizeof(char *));
-            res[groups][0] = strs[i];
-            (*returnColumnSizes)[groups] = 1;
-            groups++;
-        }
-    }*/
     *returnSize = groups;
     return res;
 }
