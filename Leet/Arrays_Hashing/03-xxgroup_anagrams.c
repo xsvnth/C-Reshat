@@ -48,7 +48,7 @@ char ***groupAnagrams(char **strs, int strsSize,
     return res;
 }
 int main(){
-    char *srs[] = {"abc", "aaa", "cab", "cat", "tac"};
+    char *srs[] = {"abc", "silent", "cab", "listen", "telins"};
     int returnSize;
     int *returnColumnSizes;
     char ***ret = groupAnagrams(srs, 5, &returnSize, &returnColumnSizes);
