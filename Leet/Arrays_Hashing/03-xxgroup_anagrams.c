@@ -26,7 +26,7 @@ char ***groupAnagrams(char **strs, int strsSize,
     for (int i = 0; i < strsSize; i++)
     {
         char *key = sorted_key(strs[i]);
-        printf("%s\n", key);
+        //printf("%s\n", key);
         int gid;
         if (get(tab, strsSize * 2, key, &gid))
         {
