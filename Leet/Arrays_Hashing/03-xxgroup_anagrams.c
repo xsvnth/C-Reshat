@@ -28,15 +28,13 @@ char ***groupAnagrams(char **strs, int strsSize,
         char *key = sorted_key(strs[i]);
         //printf("%s\n", key);
         int gid;
-        if (get(tab, strsSize * 2, key, &gid))
-        {
+        if (get(tab, strsSize * 2, key, &gid)){
             int size = (*returnColumnSizes)[gid];
             res[gid] = realloc(res[gid], (size + 1) * sizeof(char *));
             res[gid][size] = strs[i];
             (*returnColumnSizes)[gid]++;
         }
-        else
-        {
+        else{
             insert(tab, strsSize * 2, key, groups);
             res[groups] = malloc(sizeof(char *));
             res[groups][0] = strs[i];
