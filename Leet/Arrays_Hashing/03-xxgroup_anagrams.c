@@ -3,6 +3,73 @@
  * The sizes of the arrays are returned as *returnColumnSizes array.
  * Note: Both returned array and *columnSizes array must be malloced, assume caller calls free().
  */
+#include "hash.h"
+
+int cmpchar(const void *a, const void *b){
+    return (*(char *)a - *(char *)b);
+}
+
+char *sorted_key(char *s){
+    char *k = strdup(s);
+    qsort(k, strlen(k), sizeof(char), cmpchar);
+    return k;
+}
+
+char ***groupAnagrams(char **strs, int strsSize,
+        int *returnSize, int **returnColumnSizes){
+    char ***res = malloc(strsSize * sizeof(char **));
+    *returnColumnSizes = malloc(strsSize * sizeof(int));
+    Entry tab[strsSize * 2];
+    //init_table(tab, strsSize * 2);
+    int groups = 0;
+
+    for (int i = 0; i < strsSize; i++)
+    {
+        char *key = sorted_key(strs[i]);
+        printf("%s\n", key);
+        int gid;
+        if (get(tab, strsSize * 2, key, &gid))
+        {
+            int size = (*returnColumnSizes)[gid];
+            res[gid] = realloc(res[gid], (size + 1) * sizeof(char *));
+            res[gid][size] = strs[i];
+            (*returnColumnSizes)[gid]++;
+        }
+        else
+        {
+            insert(tab, strsSize * 2, key, groups);
+            res[groups] = malloc(sizeof(char *));
+            res[groups][0] = strs[i];
+            (*returnColumnSizes)[groups] = 1;
+            groups++;
+        }
+    }
+    *returnSize = groups;
+    return res;
+}
+int main(){
+    char *srs[] = {"abc", "silent", "cab", "listen", "telins"};
+    int returnSize;
+    int *returnColumnSizes;
+    char ***ret = groupAnagrams(srs, 5, &returnSize, &returnColumnSizes);
+    printf("[");
+    for (int i = 0; i < returnSize; i++){
+        printf(" [");
+        for (int j = 0; j < returnColumnSizes[i]; j++){
+            printf("%s", ret[i][j]);
+            if (j + 1 < returnColumnSizes[i])
+                printf(", ");
+        }
+        printf("] ");
+    }
+    printf("]\n");
+    for(int i = 0; i < returnSize; i++)
+        free(ret[i]);
+    free(ret);
+    free(returnColumnSizes);
+    return 0;
+}
+/*
 #include <stdlib.h>
 #include <string.h>
 #include <stdio.h>
@@ -68,4 +135,4 @@ int main(){
     free(ret);
     free(returnColumnSizes);
     return 0;
-}
+}*/
