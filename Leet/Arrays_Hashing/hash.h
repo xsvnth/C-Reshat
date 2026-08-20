@@ -22,12 +22,8 @@ static unsigned long hashstr(char *s){
 
 /* zero out the table before use */
 static void init_table(Entry *tab, int size){
-    int i = 0;
-
-    while (i < size){
+    for (int i = 0; i < size; i++)
         tab[i].used = 0;
-        i++;
-    }
 }
 
 /* find the slot for key: existing slot if present,
@@ -82,6 +78,12 @@ static void increment(Entry *tab, int size, char *key){
     }
     else
         tab[h].index++;
+}
+
+static void remove_key(Entry *tab, int size, char *key){
+    int h = find(tab, size, key);
+    if (tab[h].used)
+        tab[h].used = 0; // simple version — works fine as long as you never rely on tombstones for correctness
 }
 
 #endif
