@@ -1,0 +1,20 @@
+Weeks 1-2: Linked lists + dynamic arrays in C
+
+Build them from scratch a few times until it's muscle memory (add/remove/traverse/free, realloc-doubling growth)
+Pull 5-10 NeetCode "easy" linked-list problems, solve in C only
+
+Weeks 3-4: Hash tables in C
+
+Build your own small reusable one (the 20-30 line version, not the industrial one)
+Drill the cluster: Two Sum, Group Anagrams, Valid Anagram, Contains Duplicate, Top K Frequent — all in C
+By the end you should be able to write a basic hash table from memory without panicking
+
+Weeks 5-6: Bridge into project shape
+
+Start sketching/attempting early tronc commun projects if subjects are available (libft is usually accessible early — that's your best bet since it's foundational and reusable everywhere after)
+Mix in string parsing/tokenizing practice (feeds minishell later, but also just generally useful)
+
+Week 7 (buffer): Review + rest
+
+Revisit whatever felt shakiest
+Don't grind into exhaustion right before common core starts — arriving fresh matters more than arriving having crammed every possible pattern
