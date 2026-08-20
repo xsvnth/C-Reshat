@@ -6,7 +6,8 @@ int cmpc(const void *a, const void *b){
     return *(unsigned char*)a - *(unsigned char*)b;
 }
 
-char ***groupAnagrams(char **strs, int strsSize, int *returnSize, int **returnColumnSizes){
+char ***groupAnagrams(char **strs, int strsSize,
+        int *returnSize, int **returnColumnSizes){
     int size = strsSize * 2;
     Entry *tab = calloc(size, sizeof(Entry));
     char ***res = malloc(strsSize * sizeof(char **));
@@ -96,7 +97,7 @@ char ***groupAnagrams(char** strs, int strsSize, int* returnSize, int** returnCo
             if(strcmp(n->key, key) == 0){ idx = n->groupIdx; break; }
             n = n->next;
         }
-
+     //zaba fi itar l9owa wkda
         if(idx == -1){
             idx = groups++;
             cap[idx] = 4;
