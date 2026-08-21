@@ -67,7 +67,7 @@ int main(){
     free(returnColumnSizes);
     return 0;
 }
-/*
+/*--------------------------------------------------------------------------
 #include <stdlib.h>
 #include <string.h>
 #include <stdio.h>
@@ -133,4 +133,4 @@ int main(){
     free(ret);
     free(returnColumnSizes);
     return 0;
-}*/
+}--------------------------------------------------------------------------*/
