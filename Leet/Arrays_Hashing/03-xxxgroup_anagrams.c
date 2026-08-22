@@ -17,7 +17,7 @@ char *sorted_key(char *s){
 
 char ***groupAnagrams(char **strs, int strsSize,
         int *returnSize, int **returnColumnSizes){
-    char ***res = malloc(strsSize * sizeof(char **));
+    char ***res = malloc(strsSize * sizeof(*res));
     *returnColumnSizes = malloc(strsSize * sizeof(int));
     Entry tab[strsSize * 2];
     init_table(tab, strsSize * 2);
@@ -49,7 +49,8 @@ int main(){
     char *srs[] = {"abc", "silent", "cab", "listen", "telins"};
     int returnSize;
     int *returnColumnSizes;
-    char ***ret = groupAnagrams(srs, 5, &returnSize, &returnColumnSizes);
+    int strsize = sizeof(srs) / sizeof(srs[0]);
+    char ***ret = groupAnagrams(srs, strsize, &returnSize, &returnColumnSizes);
     printf("[");
     for (int i = 0; i < returnSize; i++){
         printf(" [");
