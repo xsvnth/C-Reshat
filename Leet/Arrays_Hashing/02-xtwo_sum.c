@@ -1,49 +1,26 @@
 #include <stdlib.h>
-typedef struct{
-    int val;
-    int index;
-    int used;
-}Entry;
-int *twosum(int *nums, int numsize, int target, int *retsize){
-    int size = numsize * 2;
-    int *res = malloc(sizeof(int) * 2);
-    Entry *tab = calloc(size, sizeof(Entry));
-    for(int i = 0; i < numsize; i++){
-        int needed = target - nums[i];
-        int h = ((needed % size) + size) % size;
-        while(tab[h].used){
-            if(tab[h].val == needed){
-                res[0] = tab[h].index;
-                res[1] = i;
-                *retsize = 2;
-                free (tab);
-                return res;
-            }
-            h = (h + 1) % size;
-        }
-        h = ((nums[i] % size) + size) % size;
-        while(tab[h].used){
-            if(tab[h].val == nums[i])
-                break;
-            h = (h + 1) % size;
-        }
-        tab[h].val = nums[i];
-        tab[h].index = i;
-        tab[h].used = 1;
-    }
-    free (tab);
-    return NULL;
+int	*two_sum(int	*arr, int resize, int	size, int	target){
+    int *res = malloc(sizeof(int) * resize);
+	int i, j, m, n;
+    for(i = 0; i < size; i++) {
+		for (j = i + 1; j < size; j++) { 
+			if(arr[i] + arr[j] == target)
+			    m = i, n = j;
+		}
+	}
+    res[0] = m, res[1] = n;
+    return res;
 }
-#include<stdio.h>
-int main(){
-    int r[] = {3, 4, 5, 9, 4, 3, 4, 8, 9, 6, 4, 5};
-    int size = sizeof(r) / sizeof(int);
-    int target = 13;
-    int retsize = 2;
-    int *R = twosum(r, size, target, &retsize);
+#include <stdio.h>
+int	main(){
+	int	arr[] = {1, 6, 3, 4, 5, 10};
+	int	target = 11;
+	int	size = sizeof(arr) / sizeof(arr[0]);
+	int *res = two_sum(arr, 2, size, target);
     printf("[");
-    for(int i = 0; i < retsize; i++){
-        printf("%d, ", R[i]);
+    for(int i = 0; i < 2; i++){
+        printf("%d, ", res[i]);
     }
-    printf("\b\b]\n");
+    printf("\b\b]");
+	return (0);
 }
