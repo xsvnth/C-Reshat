@@ -6,7 +6,7 @@ int *twosum(int *nums, int numsize, int target, int *retsize){
     int size = numsize * 2;
     int *res = malloc(sizeof(int) * 2);
     Entry *tab = malloc(sizeof(Entry) * size);
-    init_table(tab, size);
+    init(tab, size);
     char searchbuf[12];
     for(int i = 0; i < numsize; i++){
         int needed = target - nums[i];

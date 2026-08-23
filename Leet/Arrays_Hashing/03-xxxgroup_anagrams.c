@@ -20,7 +20,7 @@ char ***groupAnagrams(char **strs, int strsSize,
     char ***res = malloc(strsSize * sizeof(*res));
     *returnColumnSizes = malloc(strsSize * sizeof(int));
     Entry tab[strsSize * 2];
-    init_table(tab, strsSize * 2);
+    init(tab, strsSize * 2);
     int groups = 0;
 
     for (int i = 0; i < strsSize; i++)

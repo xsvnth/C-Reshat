@@ -21,7 +21,7 @@ static unsigned long hashstr(char *s){
 }
 
 /* zero out the table before use */
-static void init_table(Entry *tab, int size){
+static void init(Entry *tab, int size){
     for (int i = 0; i < size; i++)
         tab[i].used = 0;
 }
