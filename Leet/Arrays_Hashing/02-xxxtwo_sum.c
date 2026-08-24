@@ -2,13 +2,13 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-int *twosum(int *nums, int numsize, int target, int *retsize){
-    int size = numsize * 2;
+int *twosum(int *nums, int nsize, int target, int *retsize){
+    int size = nsize * 2;
     int *res = malloc(sizeof(int) * 2);
     Entry *tab = malloc(sizeof(Entry) * size);
     init(tab, size);
     char searchbuf[12];
-    for(int i = 0; i < numsize; i++){
+    for(int i = 0; i < nsize; i++){
         int needed = target - nums[i];
         sprintf(searchbuf, "%d", needed);
         int idx;
@@ -29,9 +29,9 @@ int *twosum(int *nums, int numsize, int target, int *retsize){
 }
 
 int main(){
-    int arr[] = {4, 6, 5, 7, 8, 0, 6, 4, 6, 8, 7, 3};
+    int arr[] = {4, 3, 5, 9, 8, 0, 6, 4, 6, 8, 7, 3};
     int size = sizeof(arr) / sizeof(arr[0]);
-    int target = 11, retsize = 2;
+    int target = 12, retsize = 2;
     int *res = twosum(arr, size, target, &retsize);
     printf("[");
     for(int i = 0; i < retsize; i++)
