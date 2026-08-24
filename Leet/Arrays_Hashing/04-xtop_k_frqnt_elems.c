@@ -22,34 +22,13 @@ int *top_k(int *nums, int size, int k, int *retsize) {
     *retsize = k;
     return res;
 }
-int	main()
-{
+int	main(){
 	int r[] = {1, 2, 2, 2, 2, 3, 3, 4, 4, 4, 1};
 	int size = sizeof(r) / sizeof(r[0]);
-    int ret;
-	int *res = top_k(r, size, 2, &ret);
+    int ret, *res = top_k(r, size, 2, &ret);
     printf("[");
-    for(int i = 0; i < ret; i++){
+    for(int i = 0; i < ret; i++)
         printf("%d, ", res[i]);
-    }
     printf("\b\b]\n");
-	return(0);
+    return(0);
 }
-/*
-int	*top_k(int	*nums, int size, int k, int *retsize){
-	int x[10] = {0};
-	int used[10] = {0};
-    int *res = malloc(size * sizeof(int));
-	for (int i = 0; i < size; i++) 
-		x[nums[i]]++;
-	for (int i = 0; i < size; i++) {
-		if(x[nums[i]] >= k && !used[nums[i]]) {
-			res[i] = nums[i];
-			used[nums[i]] = 1;
-		}
-	}
-    *retsize = k;
-	return res;
-}*/
-
-

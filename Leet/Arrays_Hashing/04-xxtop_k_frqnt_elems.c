@@ -60,20 +60,3 @@ int main(){
         printf("%d, ", res[i]);
     printf("\b\b]\n");
 }
-
-/*
-int	*top_k(int	*nums, int size, int k, int *retsize){
-	int x[10] = {0};
-	int used[10] = {0};
-    int *res = malloc(size * sizeof(int));
-	for (int i = 0; i < size; i++) 
-		x[nums[i]]++;
-	for (int i = 0; i < size; i++) {
-		if(x[nums[i]] >= k && !used[nums[i]]) {
-			res[i] = nums[i];
-			used[nums[i]] = 1;
-		}
-	}
-    *retsize = k;
-	return res;
-}*/
