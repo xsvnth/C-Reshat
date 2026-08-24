@@ -1,62 +1,55 @@
-#include "hash.h"
-#include <stdlib.h>
 #include <stdio.h>
-#include <string.h>
+#include <stdlib.h>
+int *top_k(int *nums, int size, int k, int *retsize) {
+    int OFFSET = 10000;
+    int count[20001] = {0};
+    int used[20001] = {0};
+    int *res = malloc(k * sizeof(int));
 
-int* topKFrequent(int* nums, int nsize, int k, int* retsize) {
-    int tsize = nsize * 2;
-    Entry *tab = malloc(sizeof(Entry) * tsize);
-    init(tab, tsize);
-    for (int i = 0; i < nsize; i++) {
-        char *keybuf = malloc(12);
-        sprintf(keybuf, "%d", nums[i]);
-        increment(tab, tsize, keybuf);
-    }
+    for (int i = 0; i < size; i++)
+        count[nums[i] + OFFSET]++;
 
-    int **bucket = malloc(sizeof(int *) * (nsize + 1));
-    int *bucket_len = malloc(sizeof(int) * (nsize + 1));
-    for (int f = 0; f <= nsize; f++) {
-        bucket[f] = NULL;
-        bucket_len[f] = 0;
-    }
-
-    for (int i = 0; i < tsize; i++) {
-        if (tab[i].used) {
-            int val = atoi(tab[i].key);
-            int count = tab[i].index;
-            int len = bucket_len[count];
-            bucket[count] = realloc(bucket[count], sizeof(int) * (len + 1));
-            bucket[count][len] = val;
-            bucket_len[count]++;
+    for (int picked = 0; picked < k; picked++) {
+        int best = -1;
+        for (int val = 0; val < 20001; val++) {
+            if (!used[val] && (best == -1 || count[val] > count[best]))
+                best = val;
         }
+        used[best] = 1;
+        res[picked] = best - OFFSET;
     }
 
-    int *res = malloc(sizeof(int) * k);
-    int collected = 0;
-    for (int f = nsize; f >= 1 && collected < k; f--) {
-        for (int j = 0; j < bucket_len[f] && collected < k; j++) {
-            res[collected] = bucket[f][j];
-            collected++;
-        }
-    }
-
-    for (int f = 0; f <= nsize; f++)
-        free(bucket[f]);
-    free(bucket);
-    free(bucket_len);
-    free(tab);
-
-    *retsize = collected;
+    *retsize = k;
     return res;
 }
-
-int main(){
-    int nums[] = {1, 4, 4, 4, 4, 4, 2, 2, 2, 2, 3, 3, 3, 3};
-    int size = sizeof(nums) / sizeof(int), k = 2;
-    int retsize;
-    int *res = topKFrequent(nums, size, k, &retsize);
+int	main()
+{
+	int r[] = {1, 2, 2, 2, 2, 3, 3, 4, 4, 4, 1};
+	int size = sizeof(r) / sizeof(r[0]);
+    int ret;
+	int *res = top_k(r, size, 2, &ret);
     printf("[");
-    for(int i = 0; i < retsize; i++)
+    for(int i = 0; i < ret; i++){
         printf("%d, ", res[i]);
+    }
     printf("\b\b]\n");
+	return(0);
 }
+/*
+int	*top_k(int	*nums, int size, int k, int *retsize){
+	int x[10] = {0};
+	int used[10] = {0};
+    int *res = malloc(size * sizeof(int));
+	for (int i = 0; i < size; i++) 
+		x[nums[i]]++;
+	for (int i = 0; i < size; i++) {
+		if(x[nums[i]] >= k && !used[nums[i]]) {
+			res[i] = nums[i];
+			used[nums[i]] = 1;
+		}
+	}
+    *retsize = k;
+	return res;
+}*/
+
+
