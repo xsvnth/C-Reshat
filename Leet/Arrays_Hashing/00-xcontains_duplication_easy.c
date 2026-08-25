@@ -8,8 +8,8 @@ int cmp(const void *a, const void *b){
 
 bool containsDuplicate(int *arr, int n){
     qsort(arr, n, sizeof(int), cmp);
-    for (int i = 1; i < n; i++)
-        if (arr[i] == arr[i - 1])
+    for (int i = 0; i < n; i++)
+        if (arr[i] == arr[i + 1])
             return true;
     return false;
 }
