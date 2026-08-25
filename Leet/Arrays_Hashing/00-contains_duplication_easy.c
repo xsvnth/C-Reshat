@@ -11,20 +11,9 @@ bool containsDuplicate(int *arr, int n)
 {
     qsort(arr, n, sizeof(int), cmp);
 
-    //int a[1024] = {0};
     for (int i = 1; i < n; i++)
-    {
-        //if (a[arr[i]])
-            //a[arr[i]]--;
-        //if (a[arr[i]])
-        //    return true;
-        /*a[arr[i]]++;
-
-        if (a[arr[i]]>1)
-            return true;*/
         if (arr[i] == arr[i - 1])
             return true;
-    }
     return false;
 }
 
