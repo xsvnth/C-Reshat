@@ -68,7 +68,7 @@ int main(){
     free(returnColumnSizes);
     return 0;
 }
-/*--------------------------------------------------------------------------
+/*I--------------------------------------------------------------------------
 #include <stdlib.h>
 #include <string.h>
 #include <stdio.h>
@@ -112,7 +112,67 @@ char ***groupAnagrams(char **strs, int strsSize,
     }
     *returnSize = groups;
     return res;
+}---------------------------------------------------------------------------
+
+II -------------------------------------------------------------------------
+#include <stdlib.h>
+#include <string.h>
+#include "hash.h"
+
+int cmpc(const void *a, const void *b){
+    return *(unsigned char*)a - *(unsigned char*)b;
 }
+
+char ***groupAnagrams(char **strs, int strsSize,
+        int *returnSize, int **returnColumnSizes){
+    int size = strsSize * 2;
+    Entry *tab = calloc(size, sizeof(Entry));
+    char ***res = malloc(strsSize * sizeof(char **));
+    *returnColumnSizes = malloc(strsSize * sizeof(int));
+    int *cap = malloc(strsSize * sizeof(int));
+    int groups = 0;
+
+    for (int i = 0; i < strsSize; i++){
+        int len = strlen(strs[i]);
+        char *key = malloc(len + 1);
+        memcpy(key, strs[i], len + 1);
+        qsort(key, len, 1, cmpc);
+
+        int h = find(tab, size, key); // your hash.h function
+
+        if (!tab[h].used){
+            // new group:
+            int idx = groups++;
+            tab[h].key = key;
+            tab[h].used = 1;
+            tab[h].index = idx; // storing groupIdx here
+
+            cap[idx] = 4;
+            (*returnColumnSizes)[idx] = 0;
+            res[idx] = malloc(cap[idx] * sizeof(char *));
+        } else {
+            free(key); // already have this key stored, don't need the copy
+        }
+
+        int idx = tab[h].index;
+        if ((*returnColumnSizes)[idx] == cap[idx]){
+            cap[idx] *= 2;
+            res[idx] = realloc(res[idx], cap[idx] * sizeof(char *));
+        }
+        res[idx][(*returnColumnSizes)[idx]++] = strs[i];
+    }
+
+    *returnSize = groups;
+
+    for (int i = 0; i < size; i++)
+        if (tab[i].used)
+            free(tab[i].key);
+    free(tab);
+    free(cap);
+
+    return res;
+}---------------------------------------------------------------------------
+
 int main(){
     char *srs[] = {"abc", "silent", "cab", "listen", "telins"};
     int returnSize;
