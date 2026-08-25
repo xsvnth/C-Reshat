@@ -45,7 +45,7 @@ void insert(Entry *tab, int size, char *key, int idx){
 }
 
 bool containsdup(int *nums, int nsize){
-    int size = nsize * 2 + 1;
+    int size = nsize * 2;
     Entry *tab = malloc(sizeof(Entry) * size);
     init(tab, size);
     char kbuf[12];
