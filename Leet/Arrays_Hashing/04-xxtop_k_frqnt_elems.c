@@ -3,6 +3,44 @@
 #include <stdio.h>
 #include <string.h>
 
+static void fill_table(Entry *tab, int tsize, int *nums, int nsize) {
+    for (int i = 0; i < nsize; i++) {
+        char *keyb = malloc(12);
+        sprintf(keyb, "%d", nums[i]);
+        increment(tab, tsize, keyb);
+    }
+}
+
+static void free_keys(Entry *tab, int tsize) {
+    for (int i = 0; i < tsize; i++)
+        if (tab[i].used) free(tab[i].key);
+}
+
+static int cmp(const void *a, const void *b) {
+    const Entry *Ea = a, *Eb = b;
+    if (Ea->used != Eb->used) return Eb->used - Ea->used;
+    return Eb->index - Ea->index;
+}
+
+int* topKFrequent(int* nums, int nsize, int k, int* retsize) {
+    int tsize = nsize * 2;
+    Entry *tab = malloc(sizeof(Entry) * tsize);
+    init(tab, tsize);
+
+    fill_table(tab, tsize, nums, nsize);
+    qsort(tab, tsize, sizeof(Entry), cmp);
+
+    int *res = malloc(sizeof(int) * k);
+    for (int i = 0; i < k; i++)
+        res[i] = atoi(tab[i].key);
+
+    free_keys(tab, tsize);
+    free(tab);
+
+    *retsize = k;
+    return res;
+}
+/*--------------------------------------------------------------------------
 int* topKFrequent(int* nums, int nsize, int k, int* retsize) {
     int tsize = nsize * 2;
     Entry *tab = malloc(sizeof(Entry) * tsize);
@@ -48,7 +86,7 @@ int* topKFrequent(int* nums, int nsize, int k, int* retsize) {
 
     *retsize = collected;
     return res;
-}
+}-------------------------------------------------------------------------*/
 
 int main(){
     int nums[] = {1, 4, 4, 4, 4, 4, 2, 2, 2, 2, 3, 3, 3, 3};
