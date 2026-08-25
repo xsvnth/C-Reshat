@@ -2,15 +2,12 @@
 #include <stdbool.h>
 #include <stdlib.h>
 
-int cmp(const void *a, const void *b)
-{
+int cmp(const void *a, const void *b){
     return (*(int *)a - *(int *)b);
 }
 
-bool containsDuplicate(int *arr, int n)
-{
+bool containsDuplicate(int *arr, int n){
     qsort(arr, n, sizeof(int), cmp);
-
     for (int i = 1; i < n; i++)
         if (arr[i] == arr[i - 1])
             return true;
