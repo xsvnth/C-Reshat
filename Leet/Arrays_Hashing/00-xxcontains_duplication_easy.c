@@ -45,17 +45,17 @@ void insert(Entry *tab, int size, char *key, int idx){
 }
 
 bool containsdup(int *nums, int nsize){
-    int size = nsize * 2;
-    Entry *tab = malloc(sizeof(Entry) * size);
-    init(tab, size);
+    int tsize = nsize * 2;
+    Entry *tab = malloc(sizeof(Entry) * tsize);
+    init(tab, tsize);
     char kbuf[12];
     for (int i = 0; i < nsize; i++){
         sprintf(kbuf, "%d", nums[i]);
-        if(contains(tab, size, kbuf)){
+        if(contains(tab, tsize, kbuf)){
             free (tab);
             return true;
         }
-        insert(tab, size, strdup(kbuf), nums[i]);
+        insert(tab, tsize, strdup(kbuf), nums[i]);
     }
     free (tab);
     return false;
