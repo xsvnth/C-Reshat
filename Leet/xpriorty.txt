@@ -1,27 +1,18 @@
-Arrays & Hashing
-        ↓
-Two Pointers
-        ↓
-Stack
-        ↓
-Binary Search
-        ↓
-Sliding Window
-        ↓
-Linked List
-        ↓
-Trees
-        ↓
-Heap / Priority Queue
-        ↓
-Graphs
-        ↓
-Backtracking
-        ↓
-1-D DP
-        ↓
-2-D DP
-        ↓
-Bit Manipulation
-        ↓
-Math & Geometry
+1.  Arrays & Hashing
+2.  Two Pointers
+3.  Sliding Window
+4.  Stack
+5.  Binary Search
+6.  Linked List
+7.  Trees
+8.  Heap / Priority Queue
+9.  Backtracking
+10. Tries
+11. Graphs
+12. Advanced Graphs
+13. 1-D DP
+14. 2-D DP
+15. Greedy
+16. Intervals
+17. Bit Manipulation
+18. Math & Geometry

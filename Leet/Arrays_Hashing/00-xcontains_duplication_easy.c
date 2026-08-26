@@ -16,9 +16,9 @@ bool containsDuplicate(int *arr, int n){
 
 int main(void)
 {
-    int arr[] = {1, 2, 3, 4, -1, 5, 6, 7, 9, 8};
+    int arr[] = {1, 2, 4, 3};
     int n = sizeof(arr) / sizeof(arr[0]);
 
-    printf("%d\n", containsDuplicate(arr, n));
+    printf("%b\n", containsDuplicate(arr, n));
     return 0;
 }

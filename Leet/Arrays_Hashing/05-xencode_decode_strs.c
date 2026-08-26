@@ -2,25 +2,21 @@
 #include <stdlib.h>
 #include <string.h>
 
-char	*encode(char **list, int size)
-{
-	int	i;
+char	*encode(char **list, int size){
 	int total = 0;
-	for (i = 0; i < size; i++)
+	for (int i = 0; i < size; i++)
 		total += strlen(list[i]) + 10;
 	char *res = malloc(total + 1);
 	char *p = res;
-	for (i = 0; i < size; i++)	
+	for (int i = 0; i < size; i++)	
 		p += sprintf(p, "%zu#%s", strlen(list[i]), list[i]);
 	return (res);
 }
 
-char	**decode(char *s, int *returnSize)
-{
+char	**decode(char *s, int *returnSize){
 	char **res = malloc(100 * sizeof(char *));
 	int i = 0, k = 0;
-	while (s[i])
-	{
+	while (s[i]){
 		int len = 0;
 		while (s[i] != '#')
 			len = len * 10 + (s[i++] - '0');
