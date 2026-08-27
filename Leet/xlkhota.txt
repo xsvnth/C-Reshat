@@ -1,67 +1,36 @@
-L1 + PS1
-   ↓
-Arrays & Hashing
-   ↓
-L2 + PS2
-   ↓
-Two Pointers
-   ↓
-Sliding Window
-   ↓
-Stack
-   ↓
-L3 + PS3
-   ↓
-Binary Search
-   ↓
-L4 + PS4
-   ↓
-Heap / Priority Queue
-   ↓
-L5 + PS5
-   ↓
-Trees
-   ↓
-L6 + PS6
-   ↓
-Linked List
-   ↓
-Backtracking
-   ↓
-Tries
-   ↓
-L11 + PS11
-   ↓
-Graphs — BFS
-   ↓
-L12 + PS12
-   ↓
-Graphs — DFS
-   ↓
-L13 + PS13
-   ↓
-Graphs — Shortest Path
-   ↓
-L14 + PS14
-   ↓
-Advanced Graphs
-   ↓
-L15 + PS15
-   ↓
-More Advanced Graphs
-   ↓
-Greedy
-   ↓
-Intervals
-   ↓
-L16 + PS16
-   ↓
-1-D Dynamic Programming
-   ↓
-L17 + PS17
-   ↓
-2-D Dynamic Programming
-   ↓
-Bit Manipulation
-   ↓
-Math & Geometry
+Full roadmap estimate
+Stage	Topic	Time
+1	L1 + PS1	3–5 days
+2	Arrays & Hashing	7–10 days
+3	L2 + PS2	3–5 days
+4	Two Pointers	3–5 days
+5	Sliding Window	4–6 days
+6	Stack	3–4 days
+7	L3 + PS3	3–5 days
+8	Binary Search	4–6 days
+9	L4 + PS4	3–5 days
+10	Heap / Priority Queue	4–6 days
+11	L5 + PS5	3–5 days
+12	Trees	7–10 days
+13	L6 + PS6	3–5 days
+14	Linked List	4–6 days
+15	Backtracking	5–7 days
+16	Tries	3–4 days
+17	L11 + PS11	3–5 days
+18	Graphs — BFS	4–6 days
+19	L12 + PS12	3–5 days
+20	Graphs — DFS	4–6 days
+21	L13 + PS13	3–5 days
+22	Graphs — Shortest Path	5–7 days
+23	L14 + PS14	3–5 days
+24	Advanced Graphs	5–8 days
+25	L15 + PS15	3–5 days
+26	More Advanced Graphs	4–7 days
+27	Greedy	4–6 days
+28	Intervals	3–5 days
+29	L16 + PS16	4–6 days
+30	1-D DP	7–10 days
+31	L17 + PS17	4–6 days
+32	2-D DP	7–10 days
+33	Bit Manipulation	3–5 days
+34	Math & Geometry	4–7 days
