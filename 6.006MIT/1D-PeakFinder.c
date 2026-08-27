@@ -11,7 +11,7 @@ int peakfinder(int *r, int n){
 }
 #include <stdio.h>
 int main(){
-    int r[] = {6, 7, 4, 3, 3, 2, 1, 4, 5};
+    int r[] = {12, 16, 10, 17, 13};
     int n = sizeof(r) / sizeof(int);
     printf("%d\n", peakfinder(r, n));
 }
