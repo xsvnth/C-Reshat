@@ -1,6 +1,7 @@
-#include "hash.h"
+#include "hashstr.h"
 #include <stdio.h>
 #include <stdlib.h>
+#include <sys/types.h>
 
 int *twosum(int *nums, int nsize, int target, int *retsize){
     int size = nsize * 2;

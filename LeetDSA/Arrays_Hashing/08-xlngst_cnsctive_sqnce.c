@@ -1,51 +1,7 @@
 #include <stdint.h>
 #include <stdlib.h>
 #include <limits.h>
-typedef struct {
-    int key;
-    int index;
-    int used;
-} Entry;
-
-void init(Entry *tab, int tsize){
-    for (int i = 0; i < tsize; i++)
-        tab[i].used = 0;
-}
-
-unsigned long hash(int key){
-    uint32_t h = (uint32_t)key;
-    h ^= h >> 16;
-    h *= 0x7feb352dU;
-    h ^= h >> 15;
-    h *= 0x846ca68bU;
-    h ^= h >> 16;
-   return h;
-}
-
-unsigned long find(Entry *tab, int size, int key){
-    unsigned long h = hash(key) % size;
-    while (tab[h].used){
-        if (tab[h].key == key)
-            break;
-        h = (h + 1) % size;
-    }
-    return h;
-}
-
-int get(Entry *tab, int tsize, int key, int *indx){
-    unsigned long h = find(tab, tsize, key);
-    if (!tab[h].used)
-        return 0;
-    *indx = tab[h].index;
-    return 1;
-}
-
-
-void insert(Entry *tab, int tsize, int key, int index){
-    unsigned long h = find(tab, tsize, key);
-    if (!tab[h].used)
-        tab[h].key = key, tab[h].used = 1, tab[h].index = index;
-}
+#include "hashint.h"
 
 int longestConsecutive(int* nums, int numsSize) {
     if (!numsSize) return 0;
