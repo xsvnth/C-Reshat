@@ -117,7 +117,7 @@ char ***groupAnagrams(char **strs, int strsSize,
 II -------------------------------------------------------------------------
 #include <stdlib.h>
 #include <string.h>
-#include "hash.h"
+#include "hashstr.h"
 
 int cmpc(const void *a, const void *b){
     return *(unsigned char*)a - *(unsigned char*)b;
