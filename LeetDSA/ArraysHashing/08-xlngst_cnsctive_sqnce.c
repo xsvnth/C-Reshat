@@ -6,25 +6,18 @@
 int longestConsecutive(int* nums, int numsSize) {
     if (!numsSize) return 0;
     int tsize = numsSize * 4;
-    Entry  *tab = malloc(tsize * sizeof(Entry));
-    if (!tab)
-        return 0;
+    Entry *tab = malloc(sizeof(Entry) * tsize);
     init(tab, tsize);
     for (int i = 0; i < numsSize; i++)
         insert(tab, tsize, nums[i], i);
     int max = 1;
     for (int i = 0; i < numsSize; i++){
-        int indx;
+        int indx, count = 1, next = nums[i] + 1;
         if(get(tab, tsize, nums[i], &indx) && indx != i)
             continue;
         if(get(tab, tsize, nums[i] - 1, &indx))
             continue;
-        int count = 1;
-        int next = nums[i] + 1;
-        while (count < numsSize) {
-            int next;
-            if (nums[i] > INT_MAX - count)
-                break;
+        while (count < numsSize){
             next = nums[i] + count;
             if (!get(tab, tsize, next, &indx))
                 break;
@@ -33,9 +26,10 @@ int longestConsecutive(int* nums, int numsSize) {
         if (count > max)
             max = count;
     }
-    free(tab);
+    free (tab);
     return max;
 }
+
 #include <stdio.h>
 int main(){
     int nums[] = {3, 9, 6, 2, 4, 7, 5};
