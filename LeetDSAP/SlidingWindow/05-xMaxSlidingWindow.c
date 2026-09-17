@@ -1,10 +1,10 @@
-typedef struct s_Dqueu {
+typedef struct s_Dq {
     int index;
-} t_Dqueu;
+} t_Dq;
 #include <stdlib.h>
 int* maxSlidingWindow(int* nums, int numsSize, int k, int* returnSize) {
     int *ret = malloc(sizeof(int) * (numsSize - k + 1));
-    t_Dqueu Deque[numsSize];
+    t_Dq Deque[numsSize];
     int left = 0, right = 0;
     int retIndex = 0;
     for (int i = 0; i < numsSize; i++){
