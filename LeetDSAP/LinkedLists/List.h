@@ -1,22 +1,28 @@
 #include <stdlib.h>
 #include <stdio.h>
-typedef struct s_List {
+typedef struct sNode {
     int val;
-    struct s_List *next;
-} t_List;
+    struct sNode *next;
+} tNode;
 
-t_List *createNode(int val) {
-    t_List *node = malloc(sizeof(t_List));
+typedef struct s_randomNode {
+    int val;
+    struct s_randomNode *next;
+    struct s_randomNode *random;
+} t_randomNode;
+
+tNode *createNode(int val) {
+    tNode *node = malloc(sizeof(tNode));
     node->val = val;
     node->next = NULL;
     return node;
 }
 
-t_List *createList(int *arr, int size) {
+tNode *createList(int *arr, int size) {
     if (size <= 0)
         return NULL;
-    t_List *list = createNode(arr[0]);
-    t_List *ptr = list;
+    tNode *list = createNode(arr[0]);
+    tNode *ptr = list;
     for (int i = 1; i < size; i++) {
         ptr->next = createNode(arr[i]);
         ptr = ptr->next;
@@ -24,8 +30,8 @@ t_List *createList(int *arr, int size) {
     return list;
 }
 
-void    printList(t_List *head) {
-    t_List *ptr = head;
+void    printList(tNode *head) {
+    tNode *ptr = head;
     while (ptr){
         printf("%d ", ptr->val);
         ptr = ptr->next;
@@ -33,8 +39,8 @@ void    printList(t_List *head) {
     printf("\n");
 }
 
-void    freeList(t_List *head) {
-    t_List *next;
+void    freeList(tNode *head) {
+    tNode *next;
     while (head) {
         next = head->next;
         free(head);

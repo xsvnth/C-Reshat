@@ -1,17 +1,17 @@
 #include "List.h"
 
-void reorderlist(t_List *head) {
+void reorderlist(tNode *head) {
     if (!head || !head->next)
         return;
-    t_List *slow = head;
-    t_List *fast = head;
+    tNode *slow = head;
+    tNode *fast = head;
     while (fast && fast->next) {
         slow = slow->next;
         fast = fast->next->next;
     }
-    t_List *middle = slow->next;
-    t_List *prev = NULL;
-    t_List *next;
+    tNode *middle = slow->next;
+    tNode *prev = NULL;
+    tNode *next;
     while (middle) {
         next = middle->next;
         middle->next = prev;
@@ -19,8 +19,8 @@ void reorderlist(t_List *head) {
         middle = next;
     }
     slow->next = NULL;
-    t_List *nextNode;
-    t_List *nextPrev;
+    tNode *nextNode;
+    tNode *nextPrev;
     while (head && prev) {
         nextNode = head->next;
         nextPrev = prev->next;
@@ -32,7 +32,7 @@ void reorderlist(t_List *head) {
 }
 int main() {
     int arr[] = {1, 2, 3, 4, 5};
-    t_List *head = createList(arr, 5);
+    tNode *head = createList(arr, 5);
     reorderlist(head);
     printList(head);
 }

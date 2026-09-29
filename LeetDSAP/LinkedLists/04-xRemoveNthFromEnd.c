@@ -1,8 +1,8 @@
 #include "List.h"
 
-t_List *removeNthFromEnd(t_List * head, int n) {
-    t_List *slow = head;
-    t_List *fast = head;
+tNode *removeNthFromEnd(tNode * head, int n) {
+    tNode *slow = head;
+    tNode *fast = head;
     while (n--)
         fast = fast->next;
     if (!fast)
@@ -11,7 +11,7 @@ t_List *removeNthFromEnd(t_List * head, int n) {
         slow = slow->next;
         fast = fast->next;
     }
-    t_List *movingNode = head;
+    tNode *movingNode = head;
     while (movingNode) {
         if (movingNode->next == slow) {
             movingNode->next = slow->next;
@@ -24,7 +24,7 @@ t_List *removeNthFromEnd(t_List * head, int n) {
 int main() {
     int arr[] = {1, 2, 3, 4, 5};
 
-    t_List *ret = createList(arr, 5);
+    tNode *ret = createList(arr, 5);
     removeNthFromEnd(ret, 2);
     printList(ret);
 }

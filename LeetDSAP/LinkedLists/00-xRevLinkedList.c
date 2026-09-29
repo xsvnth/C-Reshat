@@ -1,12 +1,12 @@
 #include <stdlib.h>
-typedef struct s_List {
+typedef struct sNode {
     int val;
-    struct s_List *next;
-} t_List;
+    struct sNode *next;
+} tNode;
 
-t_List *revList(t_List *head) {
-    t_List *prev = NULL;
-    t_List *next;
+tNode *revList(tNode *head) {
+    tNode *prev = NULL;
+    tNode *next;
     while (head){
         next = head->next;
         head->next = prev;
@@ -17,10 +17,10 @@ t_List *revList(t_List *head) {
 }
 #include <stdio.h>
 int main() { 
-    t_List *head, *node1, *node2, *node3;
-    node1 = malloc(sizeof(t_List)); 
-    node2 = malloc(sizeof(t_List)); 
-    node3 = malloc(sizeof(t_List)); 
+    tNode *head, *node1, *node2, *node3;
+    node1 = malloc(sizeof(tNode)); 
+    node2 = malloc(sizeof(tNode)); 
+    node3 = malloc(sizeof(tNode)); 
     node1->val = 1; 
     node2->val = 2; 
     node3->val = 3; 
@@ -29,7 +29,7 @@ int main() {
     node3->next = NULL;
     head = node1;
     printf("Before: ");
-    t_List *tmp = head;
+    tNode *tmp = head;
     while (tmp) { 
         printf("%d ", tmp->val);
         tmp = tmp->next;
