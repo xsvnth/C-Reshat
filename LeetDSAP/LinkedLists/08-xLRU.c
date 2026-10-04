@@ -23,21 +23,25 @@ t_lru *lRUcreate(int capacity){
     return obj;
 }
 
+void moveToTail(t_lru *obj, tNode *node) {
+    if (node == obj->tail)
+        return;
+    if (node->prev)
+        node->prev->next = node->next;
+    else
+        obj->head = node->next;
+    node->next->prev = node->prev;
+    node->prev = obj->tail;
+    node->next = NULL;
+    obj->tail->next = node;
+    obj->tail = node;
+}
+
 int lRUget(t_lru *obj, int key){
     tNode *movingNode = obj->head;
     while (movingNode) {
         if (movingNode->key == key) {
-            if (movingNode != obj->tail) {
-                if (movingNode->prev)
-                    movingNode->prev->next = movingNode->next;
-                else
-                    obj->head = movingNode->next;
-                movingNode->next->prev = movingNode->prev;
-                movingNode->prev = obj->tail;
-                movingNode->next = NULL;
-                obj->tail->next = movingNode;
-                obj->tail = movingNode;
-            }
+            moveToTail(obj, movingNode);
             return movingNode->val;
         }
         movingNode = movingNode->next;
@@ -50,17 +54,7 @@ void lruput(t_lru *obj, int key, int val) {
     while (movingNode) {
         if (movingNode->key == key) {
             movingNode->val = val;
-            if (movingNode != obj->tail) {
-                if (movingNode->prev)
-                    movingNode->prev->next = movingNode->next;
-                else
-                    obj->head = movingNode->next;
-                movingNode->next->prev = movingNode->prev;
-                movingNode->prev = obj->tail;
-                movingNode->next = NULL;
-                obj->tail->next = movingNode;
-                obj->tail = movingNode;
-            }
+            moveToTail(obj, movingNode);
             return;
         }
         movingNode = movingNode->next;

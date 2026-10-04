@@ -25,22 +25,25 @@ LRUCache* lRUCacheCreate(int capacity) {
     return obj;
 }
 
+void moveToTail(LRUCache *obj, tNode *node) {
+    if (node == obj->tail)
+        return;
+    if (node->prev)
+        node->prev->next = node->next;
+    else
+        obj->head = node->next;
+    node->next->prev = node->prev;
+    node->prev = obj->tail;
+    node->next = NULL;
+    obj->tail->next = node;
+    obj->tail = node;
+}
+
 int lRUCacheGet(LRUCache* obj, int key) {
     tNode *movingNode = obj->map[key];
     if (!movingNode)
         return -1;
-    if (movingNode != obj->tail) {
-        if (movingNode->prev)
-            movingNode->prev->next = movingNode->next;
-        else
-            obj->head = movingNode->next;
-
-        movingNode->next->prev = movingNode->prev;
-        movingNode->prev = obj->tail;
-        movingNode->next = NULL;
-        obj->tail->next = movingNode;
-        obj->tail = movingNode;
-    }
+    moveToTail(obj, movingNode);
     return movingNode->val;
 }
 
@@ -48,17 +51,7 @@ void lRUCachePut(LRUCache* obj, int key, int value) {
     tNode *movingNode = obj->map[key];
     if (movingNode) {
         movingNode->val = value;
-        if (movingNode != obj->tail) {
-            if (movingNode->prev)
-                movingNode->prev->next = movingNode->next;
-            else
-                obj->head = movingNode->next;
-            movingNode->next->prev = movingNode->prev;
-            movingNode->prev = obj->tail;
-            movingNode->next = NULL;
-            obj->tail->next = movingNode;
-            obj->tail = movingNode;
-        }
+        moveToTail(obj, movingNode);
         return;
     }
     if (obj->size == obj->capacity) {

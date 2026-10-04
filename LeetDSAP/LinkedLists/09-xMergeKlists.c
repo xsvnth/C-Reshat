@@ -6,7 +6,28 @@ typedef struct s_Q {
     int capacity;
 } t_Q;
 
-tNode *mergeKlists(tNode **lists, int listsSize) {
+void bubbleDown(t_Q *Queue, int pos) {
+    while (1) {
+        int smallest = pos;
+        int left = pos * 2 + 1;
+        int right = pos * 2 + 2;
+
+        if (left < Queue->size
+            && Queue->node[left]->val < Queue->node[smallest]->val)
+            smallest = left;
+        if (right < Queue->size
+            && Queue->node[right]->val < Queue->node[smallest]->val)
+            smallest = right;
+        if (smallest == pos)
+            break;
+        tNode *tmp = Queue->node[pos];
+        Queue->node[pos] = Queue->node[smallest];
+        Queue->node[smallest] = tmp;
+        pos = smallest;
+    }
+}
+
+tNode *mergeKsrtdLists(tNode **lists, int listsSize) {
     if (listsSize == 0)
         return NULL;
     t_Q *Queue = malloc(sizeof(t_Q));
@@ -19,29 +40,11 @@ tNode *mergeKlists(tNode **lists, int listsSize) {
             Queue->size++;
         }
     }
-    for (int i = Queue->size / 2 - 1; i >= 0; i--) {
-        int pos = i;
-        while (1) {
-            int smallest = pos;
-            int left = pos * 2 + 1;
-            int right = pos * 2 + 2;
-            if (left < Queue->size
-                && Queue->node[left]->val < Queue->node[smallest]->val)
-                smallest = left;
-            if (right < Queue->size
-                && Queue->node[right]->val < Queue->node[smallest]->val)
-                smallest = right;
-            if (smallest == pos)
-                break;
-            tNode *tmp = Queue->node[pos];
-            Queue->node[pos] = Queue->node[smallest];
-            Queue->node[smallest] = tmp;
-            pos = smallest;
-        }
-    }
+    for (int i = Queue->size / 2 - 1; i >= 0; i--)
+        bubbleDown(Queue, i);
     tNode *mergedHead = NULL;
     tNode *tail = NULL;
-    while (Queue->size > 0) {
+    while (Queue->size) {
         tNode *smallest = Queue->node[0];
         tNode *next = smallest->next;
         if (!mergedHead) {
@@ -52,34 +55,14 @@ tNode *mergeKlists(tNode **lists, int listsSize) {
             tail->next = smallest;
             tail = smallest;
         }
-        Queue->node[0] = next;
         if (next) 
             Queue->node[0] = next;
         else { 
             Queue->node[0] = Queue->node[Queue->size - 1];
             Queue->size--;
         }
-        if (Queue->size > 0) {
-            int pos = 0;
-            while (1) {
-                int smallestPos = pos;
-                int left = pos * 2 + 1;
-                int right = pos * 2 + 2;
-                if (left < Queue->size
-                && Queue->node[left]->val < Queue->node[smallestPos]->val)
-                    smallestPos = left;
-
-                if (right < Queue->size
-                && Queue->node[right]->val < Queue->node[smallestPos]->val)
-                    smallestPos = right;
-                if (smallestPos == pos)
-                    break;
-                tNode *tmp = Queue->node[pos];
-                Queue->node[pos] = Queue->node[smallestPos];
-                Queue->node[smallestPos] = tmp;
-                pos = smallestPos;
-            }
-        }
+        if (Queue->size)
+            bubbleDown(Queue, 0);
     }
     free(Queue->node);
     free(Queue);
@@ -99,7 +82,7 @@ int main() {
         list3,
         NULL
     };
-    tNode *merged = mergeKlists(lists, 4);
+    tNode *merged = mergeKsrtdLists(lists, 4);
     printf("Merged: ");
     printList(merged);
     freeList(merged);
